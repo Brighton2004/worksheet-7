@@ -1,0 +1,78 @@
+#include <iostream>
+using namespace std;
+
+class Worker {
+protected:
+    string employeeName;
+    int employeeId;
+    int age;
+    long long aadhar;
+
+public:
+    void getWorkerDetails() {
+        cout << "Enter Employee Name: ";
+        cin >> employeeName;
+        cout << "Enter Employee ID: ";
+        cin >> employeeId;
+        cout << "Enter Age: ";
+        cin >> age;
+        cout << "Enter Aadhar Number: ";
+        cin >> aadhar;
+    }
+
+    void displayWorkerDetails() {
+        cout << "\nEmployee Name : " << employeeName;
+        cout << "\nEmployee ID   : " << employeeId;
+        cout << "\nAge           : " << age;
+        cout << "\nAadhar Number : " << aadhar;
+    }
+};
+
+class HourlyWorker : public Worker {
+private:
+    int hoursWorked;
+    float wageRate;
+    float salary;
+
+public:
+    void getHourlyDetails() {
+        getWorkerDetails();
+        cout << "Enter Hours Worked: ";
+        cin >> hoursWorked;
+        cout << "Enter Wage Rate per Hour: ";
+        cin >> wageRate;
+    }
+
+    void calculateSalary() {
+        salary = hoursWorked * wageRate;
+    }
+
+    void displaySalary() {
+        displayWorkerDetails();
+        cout << "\nHours Worked  : " << hoursWorked;
+        cout << "\nWage Rate     : " << wageRate;
+        cout << "\nSalary        : " << salary << endl;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter Number of Employees: ";
+    cin >> n;
+
+    HourlyWorker emp[n];
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter Details for Employee " << i + 1 << endl;
+        emp[i].getHourlyDetails();
+        emp[i].calculateSalary();
+    }
+
+    cout << "\n------ Employee Salary Details ------\n";
+    for (int i = 0; i < n; i++) {
+        emp[i].displaySalary();
+        cout << "\n----------------------------------\n";
+    }
+
+    return 0;
+}
